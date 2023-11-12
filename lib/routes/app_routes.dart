@@ -9,4 +9,6 @@ class AppRoutes {
   static const String novelDetail = "/novel-detail";
   static const String searchNovel = "/search-novel";
   static const String filterNovel = "/filter-novel";
+  static const String chaptersList = "/chapters-list";
+  static const String chapterDetail = '/chapter-detail';
 }

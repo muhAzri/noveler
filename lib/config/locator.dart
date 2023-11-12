@@ -2,12 +2,13 @@ import 'package:get_it/get_it.dart';
 import 'package:noveler/config/api_client.dart';
 import 'package:noveler/data/services/auth_services.dart';
 import 'package:noveler/data/services/bookmark_services.dart';
+import 'package:noveler/data/services/chapter_service.dart';
 import 'package:noveler/data/services/discover_services.dart';
 import 'package:noveler/data/services/genre_services.dart';
 import 'package:noveler/data/services/novel_detail_services.dart';
 import 'package:noveler/data/services/profile_services.dart';
 import 'package:noveler/data/services/search_novel.services.dart';
-import 'package:noveler/feature/app/bloc/cubit/bottom_nav_bar_cubit.dart';
+import 'package:noveler/feature/app/bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'package:noveler/routes/app_router.dart';
 
 class Locator {
@@ -24,5 +25,6 @@ class Locator {
     getIt.registerSingleton<BookmarkServices>(BookmarkServices());
     getIt.registerSingleton<SearchNovelServices>(SearchNovelServices());
     getIt.registerSingleton<GenreServices>(GenreServices());
+    getIt.registerSingleton<ChapterService>(ChapterService());
   }
 }

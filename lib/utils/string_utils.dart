@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 extension StringExtensions on String {
   String capitalize() {
     return "${this[0].toUpperCase()}${substring(1)}";
@@ -20,5 +22,16 @@ extension StringExtensions on String {
     }
 
     return avatar.toUpperCase();
+  }
+
+  String get hexUrlEncode {
+    return replaceAll(' ', '%20');
+  }
+}
+
+extension DateTimeExtensions on DateTime {
+  String localDateParse() {
+    final formattedDate = DateFormat('dd MMM yyyy').format(toLocal());
+    return formattedDate;
   }
 }

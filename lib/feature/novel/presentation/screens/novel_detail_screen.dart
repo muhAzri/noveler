@@ -9,7 +9,9 @@ import 'package:noveler/feature/novel/presentation/widgets/genre_widget.dart';
 import 'package:noveler/feature/novel/presentation/widgets/novel_detail_section.dart';
 import 'package:noveler/feature/novel/presentation/widgets/recommended_novel_tile.dart';
 import 'package:noveler/feature/novel/presentation/widgets/row_section_widget.dart';
+import 'package:noveler/routes/app_routes.dart';
 import 'package:noveler/utils/flushbar_util.dart';
+import 'package:noveler/utils/string_utils.dart';
 import 'package:noveler/utils/styles.dart';
 
 class NovelDetailScreen extends StatefulWidget {
@@ -150,7 +152,13 @@ class DetailNovelBottomAppBar extends StatelessWidget {
                 ),
                 CustomButton(
                   title: 'Read Now',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.chaptersList,
+                        arguments: {
+                          'novelTitle': state.detail.title,
+                          'novelID': state.detail.id,
+                        });
+                  },
                   height: 56.h,
                   width: 180.w,
                   containerPadding: EdgeInsets.symmetric(
@@ -293,7 +301,7 @@ class AppBarTitle extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(right: 24.w),
       child: Text(
-        "The Dragon Egg I Nurtured for a Thousand Years Finally Hatched",
+        state.detail.title,
         style: blackTextStyle.copyWith(
           fontWeight: FontWeight.bold,
           fontSize: 18.sp,
@@ -431,9 +439,11 @@ class NovelInfo extends StatelessWidget {
           Text(
             state.detail.author,
             style: whiteTextStyle.copyWith(fontSize: 14.sp, fontWeight: medium),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           Text(
-            state.detail.status,
+            state.detail.status.capitalize(),
             style: whiteTextStyle.copyWith(fontSize: 14.sp, fontWeight: medium),
           ),
           SizedBox(
@@ -525,7 +535,7 @@ class ContentSection extends StatelessWidget {
           ),
           GestureDetector(
             child: Text(
-              "${state.detail.status} ${state.detail.chaptersCount} Chapters >",
+              "${state.detail.status.capitalize()} ${state.detail.chaptersCount} Chapters >",
               style: blackTextStyle.copyWith(
                 fontWeight: light,
                 fontSize: 12.sp,
@@ -606,7 +616,7 @@ class NovelInfoSection extends StatelessWidget {
           ),
           RowSectionWidget(
             title: 'Status',
-            value: state.detail.status,
+            value: state.detail.status.capitalize(),
           ),
           RowSectionWidget(
             title: 'Author',
