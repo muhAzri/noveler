@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:noveler/feature/app/bloc/cubit/bottom_nav_bar_cubit.dart';
+import 'package:noveler/feature/app/bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'package:noveler/feature/bookmark/bloc/bloc/bookmark_bloc.dart';
 import 'package:noveler/feature/bookmark/presentation/screens/bookmark_screen.dart';
 import 'package:noveler/feature/discover/presentation/screens/discover_screen.dart';

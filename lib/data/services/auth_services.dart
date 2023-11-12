@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:noveler/config/api_client.dart';
 import 'package:noveler/data/form_model/login_form_model.dart';
 import 'package:noveler/data/form_model/register_form_model.dart';
-import 'package:noveler/utils/sessions_expired.dart';
 
 class AuthServices {
   final ApiClient dio = GetIt.instance<ApiClient>();
@@ -13,6 +12,7 @@ class AuthServices {
     try {
       final response = await dio.apiPost('/v1/sessions', data: model.toJson());
 
+
       if (response.statusCode == 200) {
         final data = response.data['data'];
         await storage.write(key: 'token', value: data['access_token']);
@@ -21,7 +21,7 @@ class AuthServices {
       } else {
         throw response;
       }
-    } on DioException catch (error, _) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -38,7 +38,7 @@ class AuthServices {
       } else {
         throw response;
       }
-    } on DioException catch (error, _) {
+    } catch (e) {
       rethrow;
     }
   }
@@ -55,8 +55,7 @@ class AuthServices {
       } else {
         throw response;
       }
-    } on DioException catch (error, _) {
-      sessionExpiredHandler();
+    } catch (e) {
       rethrow;
     }
   }

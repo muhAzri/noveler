@@ -6,6 +6,9 @@ import 'package:noveler/feature/app/presentation/screens/splash/splash_screen.da
 import 'package:noveler/feature/auth/bloc/auth_bloc.dart';
 import 'package:noveler/feature/auth/presentation/screens/login_screen.dart';
 import 'package:noveler/feature/auth/presentation/screens/register_screen.dart';
+import 'package:noveler/feature/chapter/bloc/bloc/chapter_bloc.dart';
+import 'package:noveler/feature/chapter/presentation/screens/chapter_detail_screen.dart';
+import 'package:noveler/feature/chapter/presentation/screens/chapter_list_screen.dart';
 import 'package:noveler/feature/novel/bloc/detail_novel/detail_novel_bloc.dart';
 import 'package:noveler/feature/novel/presentation/screens/novel_detail_screen.dart';
 import 'package:noveler/feature/profile/presentation/screens/about_us_screen.dart';
@@ -86,6 +89,34 @@ class AppRouter {
                 child: FilterScreen(
                   params: params,
                   setStateParams: setStateParams,
+                ),
+              );
+
+            case AppRoutes.chaptersList:
+              final Map<String, dynamic> arguments =
+                  settings.arguments as Map<String, dynamic>;
+              final String novelID = arguments['novelID'];
+              final String title = arguments['novelTitle'];
+              return BlocProvider(
+                create: (context) => ChapterBloc()
+                  ..add(
+                    GetChapterListEvent(novelID: novelID),
+                  ),
+                child: ChapterListScreen(title: title),
+              );
+
+            case AppRoutes.chapterDetail:
+              final Map<String, dynamic> arguments =
+                  settings.arguments as Map<String, dynamic>;
+              final String chapterID = arguments['chapterID'];
+              return BlocProvider(
+                create: (context) => ChapterBloc()
+                  ..add(
+                    GetChapterDetailEvent(chapterID: chapterID),
+                  ),
+                child: ChapterDetailScreen(
+                  key: Key(chapterID),
+                  chapterID: chapterID,
                 ),
               );
 
