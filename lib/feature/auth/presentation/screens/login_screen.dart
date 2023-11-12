@@ -20,10 +20,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  final TextEditingController emailController =
-      TextEditingController(text: "email@domain.com");
+  final TextEditingController emailController = TextEditingController(text: "");
   final TextEditingController passwordController =
-      TextEditingController(text: "P@ssw0rd");
+      TextEditingController(text: "");
   bool isPasswordObscured = true;
 
   void togglePasswordVisibility() {
